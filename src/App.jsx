@@ -5,19 +5,19 @@ import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import Calendar from './modals/Calendar'
 import Details from './pages/Details/Details'
+import Friends from './pages/Friends/Friends'
 
 function App() {
 
   return (
     <BrowserRouter>
     <Routes>
-
       <Route path="/" element={<Home/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/calendar" element={<Calendar/>} />
       <Route path="/details" element={<Details/>} />
-      
+      <Route path="/friends" element={<Friends/>} />
     </Routes>
     </BrowserRouter>
   )

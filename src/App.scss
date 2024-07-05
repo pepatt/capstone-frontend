@@ -1,0 +1,11 @@
+@import './styles/partials/fonts';
+@import './styles/partials/variables';
+
+* {
+    color: $brown;
+    font-family: 'Nunito';
+    font-weight: 400;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

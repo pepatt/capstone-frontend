@@ -1,0 +1,167 @@
+@import '../../styles/partials/variables';
+@import '../../styles/partials/fonts';
+
+.home {
+    width: 100%;
+    background-color: $white;
+
+    &__header {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        background-color: $background-accent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__header-logo-wrap {
+        width: 100%; 
+    }
+    &__header-logo {
+        height: 1.5rem;
+    }
+
+    &__header-title {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center; 
+    }
+    &__header-temp-wrapper {
+        width: 100%; 
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__header-temp-icon {
+        height: 1.5rem;
+    }
+
+    &__body {
+        padding: 0 1rem 5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $background-yellow;
+    }
+
+    &__body-illustration-wrap {
+        width: 100%; 
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    &__body-illustration {
+        width: 100%;
+    }
+  
+    &__two-icons-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__one-icon-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: $background-accent;
+        border-radius: 5px;
+        width: 40%;
+        padding: 1rem 0;
+    }
+
+    &__calendar-icon {
+        height: 2rem;
+    }
+    &__friends-icon {
+        height: 2rem;
+    }
+  
+    &__body-suggestion {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-left: $background-accent solid 2px;
+        border-right: $background-accent solid 2px;
+        width: 100%;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+  
+    &__apply-btn {
+      outline: none;
+      background-color: $button-orange;
+      border-radius: 5px;
+      border: none;
+      min-width: 100%;
+      padding: 0.7rem 0;
+      color: $background-yellow;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    &__apply-btn-active {
+        outline: none;
+        background-color: $green;
+        border-radius: 5px;
+        border: none;
+        min-width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    &__apply-btn-active-p {
+        width: 50%;
+        font-weight: 800;
+        color: $background-yellow;
+        font-size: 1.2rem;
+        padding-left: 1rem;
+    }
+    
+    &__apply-btn-cancel-wraper {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__apply-btn-cancel-wrap {
+        padding: 1rem;
+        background-color: $red;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    &__apply-btn-cancel {
+        height: 1rem;
+    }
+  
+    &__details-link {
+      color: $light-blue;
+      text-decoration: none;
+      text-decoration: underline;
+      cursor: pointer;
+      padding-bottom: 1rem;
+    }
+  }
+  
+
