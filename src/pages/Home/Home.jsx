@@ -1,11 +1,12 @@
 import './Home.scss'
 import { Link } from 'react-router-dom'
-import illustration from '../../assets/icons/alarm-clock.svg'
-import logo from '../../assets/icons/home.svg'
-import friends from '../../assets/icons/users-alt.svg'
-import guage from '../../assets/icons/gauge-high-solid.svg'
-import calendar from '../../assets/icons/calendar.svg'
-import cancel from '../../assets/icons/cross.svg'
+import tube from '../../assets/icons/tube.jpg'
+import temp_regular from '../../assets/icons/temp_regular.jpg'
+import illustration_applied from '../../assets/images/illustration_applied.jpg'
+import illustration_not_applied from '../../assets/images/illustration_not_applied.jpg'
+import calendar from '../../assets/icons/calendar.jpg'
+import friends from '../../assets/icons/friends.jpg'
+import cross from '../../assets/icons/cross.jpg'
 import { React, useState } from 'react'
 
 function Home() {
@@ -20,16 +21,16 @@ function Home() {
     <div className='home'>
       <div className="home__header">
         <Link to="/" className="home__header-logo-wrap">
-          <img src={logo} alt="App Logo" className="home__header-logo" />
+          <img src={tube} alt="App Logo" className="home__header-logo" />
         </Link>
         <div className="home__header-title">SPF BUD</div>
         <div className="home__header-temp-wrapper">
-          <img src={guage} alt="Temp Icon" className="home__header-temp-icon" />
+          <img src={temp_regular} alt="Temp Icon" className="home__header-temp-icon" />
         </div>
       </div>
       <div className="home__body">
         <div className="home__body-illustration-wrap">
-          <img src={illustration} alt="body__illustration" className="home__body-illustration" />
+          <img src={illustration_not_applied} alt="body__illustration" className="home__body-illustration" />
         </div>
         <div className="home__two-icons-wrap">
           <Link to="/calendar" className="home__one-icon-wrap">
@@ -52,7 +53,7 @@ function Home() {
                 <p className="home__apply-btn-active-p">UVI: 1</p>
                 <div className="home__apply-btn-cancel-wraper">
                   <div onClick={toggleApply} className="home__apply-btn-cancel-wrap">
-                    <img src={cancel} alt="Cancel Icon" className="home__apply-btn-cancel" />
+                    <img src={cross} alt="Cancel Icon" className="home__apply-btn-cancel" />
                   </div>
                 </div>
               </div>

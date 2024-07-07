@@ -6,7 +6,7 @@ function Details() {
     const [UvData, setUvData] = useState(0);
 
     async function getWeather() {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${import.meta.env.VITE_BC_VAN_LAT}&lon=${import.meta.env.VITE_BC_VAN_LON}&units=metric&appid=${import.meta.env.VITE_OPEN_WEATHER_API_KEY}`)
+        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${import.meta.env.VITE_BC_VAN_LAT}&lon=${import.meta.env.VITE_BC_VAN_LON}&units=metric&appid=${import.meta.env.VITE_OPEN_WEATHER_API_KEY}`);
         setWeatherData(response.data);
     }
 
