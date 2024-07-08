@@ -21,23 +21,30 @@ import cross from '../../assets/icons/cross.png'
 import { React, useState, useEffect } from 'react'
 
 function Home() {
-  const [isApplied, setIsApplied] = useState(false);
   const [weatherData, setWeatherData] =  useState([]);
 
   async function getWeatherData() {
-    const response = await axios.get("http://localhost:8080/weather");
+    const response = await axios.get("http://localhost:8080/weather/notApplied");
     setWeatherData(response.data[0])
   }
+
   console.log(weatherData);
 
-  function toggleApply() {
-    
-    setIsApplied(!isApplied);
-  }
+async function apply() {
+  const response = await axios.get("http://localhost:8080/weather/applied");
+  setWeatherData(response.data[0]);
+}
+
+async function cancelApply() {
+  const response = await axios.get("http://localhost:8080/weather/notApplied");
+  setWeatherData(response.data[0]);
+}
+
 
   useEffect(() => {
     getWeatherData();
   }, [])
+
 
 
   return (
@@ -71,7 +78,12 @@ function Home() {
       </div>
       <div className="home__body">
         <div className="home__body-illustration-wrap">
-          <img src={illustration_not_applied} alt="body__illustration" className="home__body-illustration" />
+          <img src={ weatherData.isApplied === 0
+            ? illustration_not_applied
+            : weatherData.isApplied === 1
+            ? illustration_applied
+            : illustration_not_applied
+            } alt="body__illustration" className="home__body-illustration" />
         </div>
         <div className="home__two-icons-wrap">
           <Link to="/calendar" className="home__one-icon-wrap">
@@ -86,14 +98,14 @@ function Home() {
         </p>
         <Link to="/details" className="home__details-link">Details</Link>
 
-        {!isApplied 
+        {!weatherData.isApplied 
         ?
-        <button onClick={toggleApply} className="home__apply-btn">APPPLIED</button> 
+        <button onClick={apply} className="home__apply-btn">APPPLIED</button> 
         : 
                 <div className="home__apply-btn-active">
                 <p className="home__apply-btn-active-p">UVI: {weatherData.UVI}</p>
                 <div className="home__apply-btn-cancel-wraper">
-                  <div onClick={toggleApply} className="home__apply-btn-cancel-wrap">
+                  <div onClick={cancelApply} className="home__apply-btn-cancel-wrap">
                     <img src={cross} alt="Cancel Icon" className="home__apply-btn-cancel" />
                   </div>
                 </div>
