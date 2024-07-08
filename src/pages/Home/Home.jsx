@@ -22,22 +22,29 @@ import { React, useState, useEffect } from 'react'
 
 function Home() {
   const [isApplied, setIsApplied] = useState(false);
-  const [weatherData, setWeatherData] =  useState([]);
+  const [weatherData, setWeatherData] =  useState({});
 
   async function getWeatherData() {
     const response = await axios.get("http://localhost:8080/weather");
     setWeatherData(response.data[0])
   }
-  console.log(weatherData);
 
-  function toggleApply() {
-    
+  async function toggleApply() {
     setIsApplied(!isApplied);
+  }
+
+  async function userSpecificData() {
+    const response = await axios.get(
+      isApplied ? "http://localhost:8080/weather/notApplied" : "http://localhost:8080/weather/applied"
+    );
+    setWeatherData(response.data);
+    console.log(weatherData);
   }
 
   useEffect(() => {
     getWeatherData();
-  }, [])
+    userSpecificData();
+  }, [isApplied])
 
 
   return (
@@ -71,7 +78,12 @@ function Home() {
       </div>
       <div className="home__body">
         <div className="home__body-illustration-wrap">
-          <img src={illustration_not_applied} alt="body__illustration" className="home__body-illustration" />
+          <img src={ weatherData.isApplied === 0
+            ? illustration_not_applied
+            : weatherData.isApplied === 1
+            ? illustration_applied
+            : illustration_not_applied
+            } alt="body__illustration" className="home__body-illustration" />
         </div>
         <div className="home__two-icons-wrap">
           <Link to="/calendar" className="home__one-icon-wrap">
