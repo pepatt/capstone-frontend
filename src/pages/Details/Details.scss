@@ -1,0 +1,43 @@
+@import '../../styles/partials/variables';
+@import '../../styles/partials/fonts';
+
+.details {
+    width: 100%;
+    background-color: $background-yellow;
+    &__wrap {
+        width: 100%;
+        padding: 0 1rem;
+        padding-bottom: 12rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+  
+    &__accounts-title {
+        font-size: 1.5rem;
+        padding: 1rem 0;
+    }
+  
+    &__acc-data-wrap {
+        width: 100%;
+        border-top: $light-blue solid 2px;
+        border-bottom: $light-blue solid 2px;
+    }
+  
+    &__name {
+        padding: 0.5rem;
+    }
+  
+    &__weather-title {
+        font-size: 1.5rem;
+        padding: 1rem 0;
+    }
+  
+    &__weather-data-wrap {
+        width: 100%;
+        border-top: $light-blue solid 2px;
+        border-bottom: $light-blue solid 2px;
+    }
+  }
+  

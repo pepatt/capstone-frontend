@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../components/Header/Header'
 
 function Calendar() {
   return (
-    <div>Calendar</div>
+    <div>
+      <Header/>
+      <p>Calendar (nice to have)</p>
+    </div>
   )
 }
 
