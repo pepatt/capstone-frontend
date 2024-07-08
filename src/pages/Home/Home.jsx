@@ -31,6 +31,7 @@ function Home() {
   console.log(weatherData);
 
   function toggleApply() {
+    
     setIsApplied(!isApplied);
   }
 
