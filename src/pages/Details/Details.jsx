@@ -8,7 +8,7 @@ function Details() {
     const [userData, setUserData] = useState([]);
 
     async function getWeatherData() {
-        const response = await axios.get("http://localhost:8080/weather");
+        const response = await axios.get("http://localhost:8080/weather/notApplied");
         setWeatherData(response.data[0])
     }
 
