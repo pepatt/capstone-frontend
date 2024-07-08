@@ -21,30 +21,30 @@ import cross from '../../assets/icons/cross.png'
 import { React, useState, useEffect } from 'react'
 
 function Home() {
-  const [isApplied, setIsApplied] = useState(false);
-  const [weatherData, setWeatherData] =  useState({});
+  const [weatherData, setWeatherData] =  useState([]);
 
   async function getWeatherData() {
-    const response = await axios.get("http://localhost:8080/weather");
+    const response = await axios.get("http://localhost:8080/weather/notApplied");
     setWeatherData(response.data[0])
   }
 
-  async function toggleApply() {
-    setIsApplied(!isApplied);
-  }
+  console.log(weatherData);
 
-  async function userSpecificData() {
-    const response = await axios.get(
-      isApplied ? "http://localhost:8080/weather/notApplied" : "http://localhost:8080/weather/applied"
-    );
-    setWeatherData(response.data);
-    console.log(weatherData);
-  }
+async function apply() {
+  const response = await axios.get("http://localhost:8080/weather/applied");
+  setWeatherData(response.data[0]);
+}
+
+async function cancelApply() {
+  const response = await axios.get("http://localhost:8080/weather/notApplied");
+  setWeatherData(response.data[0]);
+}
+
 
   useEffect(() => {
     getWeatherData();
-    userSpecificData();
-  }, [isApplied])
+  }, [])
+
 
 
   return (
@@ -98,14 +98,14 @@ function Home() {
         </p>
         <Link to="/details" className="home__details-link">Details</Link>
 
-        {!isApplied 
+        {!weatherData.isApplied 
         ?
-        <button onClick={toggleApply} className="home__apply-btn">APPPLIED</button> 
+        <button onClick={apply} className="home__apply-btn">APPPLIED</button> 
         : 
                 <div className="home__apply-btn-active">
                 <p className="home__apply-btn-active-p">UVI: {weatherData.UVI}</p>
                 <div className="home__apply-btn-cancel-wraper">
-                  <div onClick={toggleApply} className="home__apply-btn-cancel-wrap">
+                  <div onClick={cancelApply} className="home__apply-btn-cancel-wrap">
                     <img src={cross} alt="Cancel Icon" className="home__apply-btn-cancel" />
                   </div>
                 </div>
