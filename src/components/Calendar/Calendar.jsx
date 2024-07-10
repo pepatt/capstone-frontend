@@ -2,8 +2,22 @@ import {react, useState, useEffect} from 'react';
 import './Calendar.scss';
 import { Info, DateTime, Interval } from 'luxon';
 import classNames from 'classnames';
+import check from '../../assets/icons/check.png'
+import Header from '../Header/Header';
+import axios from 'axios';
+
+import clouds from '../../assets/images/clouds.png'
+import sun from '../../assets/images/sun.png'
+import rain from '../../assets/images/rain.png'
+import sun_clouds from '../../assets/images/sun_clouds.png'
+
+import back from '../../assets/icons/back.png'
+import forward from '../../assets/icons/forward.png'
 
 export default function Calendar() {
+
+  const [isAppliedDays, setIsAppliedDays] = useState([]);
+
   const today = DateTime.local();
   const [firstDayOfActiveMonth, setFirstDayOfActiveMonth] = useState(
     today.startOf('month')
@@ -13,7 +27,6 @@ export default function Calendar() {
     firstDayOfActiveMonth.startOf('week'),
     firstDayOfActiveMonth.endOf('month').endOf('week')
   ).splitBy({day: 1}).map(day => day.start);
-
 
 
   const goToPreviousMonth = () => {
@@ -28,29 +41,47 @@ export default function Calendar() {
     setFirstDayOfActiveMonth(today.startOf('month'));
   }
 
-  function getDate(day, month, year) {
-    console.log(`year ${year}`);
-    console.log(`month ${month}`);
-    console.log(`day ${day}`);
+  async function ConditionalRenderData() {
+    try{
+    const dateData = {
+        month: 7,
+        year: 2024,
+        isApplied: true
+    }
+
+    const response = await axios.post("http://localhost:8080/weather/dataDependant", dateData);
+    setIsAppliedDays(response.data)
+
+    } catch (err) {
+      console.log(err);
+    }
   }
-  console.log(daysOfMonth[0].c)
-  const data = daysOfMonth[0].c.month;
-  console.log(data);
   
+
+  useEffect(() => {
+    ConditionalRenderData();
+  }, []);
+
+
   return (
     <div className="calendar__container">
+      <Header />
       <div className="calendar">
         <div className="calendar__headline">
           <div className="calendar__headline-month">
             {firstDayOfActiveMonth.monthShort}, {firstDayOfActiveMonth.year}
           </div>
           <div className="calendar__headline-controls">
-            <div className="calendar__headline-control" onClick={goToPreviousMonth} >{"<<"}</div>
+            <div className="calendar__headline-control" onClick={goToPreviousMonth} >
+              <img src={back} alt="Forward Icon" className="calendar__headline-control-arrow" />
+            </div>
             <div className="calendar__headline-control 
             calendar__headline-controls-today"
             onClick={goToToday}
             >{"Today"}</div>
-            <div className="calendar__headline-control" onClick={goToNextMonth} >{">>"}</div>
+            <div className="calendar__headline-control" onClick={goToNextMonth} >
+              <img src={forward} alt="Forward Icon" className="calendar__headline-control-arrow" />
+            </div>
           </div>
         </div>
         <div className="calendar__weeks-grid">
@@ -61,19 +92,28 @@ export default function Calendar() {
           ))}
         </div>
         <div className="calendar__grid">
-          {daysOfMonth.map((dayOfMonth, dayOfMonthIndex) => (
-            <div onClick={() => {
-              getDate(
-                dayOfMonth.day, dayOfMonth.month, dayOfMonth.year
-              )
-            }} key={dayOfMonthIndex} className={classNames({
-              "calendar__grid-cell": true,
-              "calendar__grid-cell-inactive": 
-              dayOfMonth.month !== firstDayOfActiveMonth.month,
+          {daysOfMonth.map((dayOfMonth, dayOfMonthIndex) => {
+            const isApplied = isAppliedDays.some((data) => data.created_at_day === dayOfMonth.day);
+
+            return (
+              <div key={dayOfMonthIndex} className="calendar__grid-wrap">
+              <div className={classNames({
+                "calendar__grid-wrapper": true, 
+                "calendar__grid-cell-inactive": 
+                  dayOfMonth.month !== firstDayOfActiveMonth.month,
               })}>
-              {dayOfMonth.day}
+                <div className={"calendar__grid-cell"}>
+                  {dayOfMonth.day}
+                  <img src={check} alt="check img" className={classNames({
+                    "calendar__grid-cell-img": true,
+                    "display__no": !isApplied
+                    })}/>
+                </div>
+                <img src={sun_clouds} className={`calendar__grid-weather-icon`} />
+              </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -26,18 +26,18 @@ function Home() {
   const [weatherData, setWeatherData] =  useState([]);
 
   const today = DateTime.local();
-  const firstDayOfActiveMonth=today.startOf('month');
-    const daysOfMonth = Interval.fromDateTimes(
+  const firstDayOfActiveMonth = today.startOf('month');
+  
+  const daysOfMonth = Interval.fromDateTimes(
     firstDayOfActiveMonth.startOf('week'),
     firstDayOfActiveMonth.endOf('month').endOf('week')
-  ).splitBy({day: 1}).map(day => day.start);
-
+  ).splitBy({ day: 1 }).map(day => day.start);
+  
   const dateData = {
-    created_at_day: daysOfMonth[0].c.day,
-    created_at_month: daysOfMonth[0].c.month,
-    created_at_year: daysOfMonth[0].c.year
-  }
-
+    created_at_day: today.day,
+    created_at_month: today.month,
+    created_at_year: today.year
+  };
 
   async function getWeatherData() {
     const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
@@ -60,7 +60,6 @@ async function cancelApply() {
     getWeatherData();
   }, [])
 
-  console.log(weatherData);
 
 
   return (
@@ -162,7 +161,7 @@ async function cancelApply() {
 
           {!weatherData.isApplied 
           ?
-          <button onClick={apply} className="home__apply-btn">APPPLIED</button> 
+          <button onClick={apply} className="home__apply-btn">APPLIED</button> 
           : 
                   <div className="home__apply-btn-active">
                   <p className="home__apply-btn-active-p">UVI: {weatherData.UVI}</p>
