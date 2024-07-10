@@ -1,0 +1,134 @@
+@import '../../styles/partials/variables';
+@import '../../styles/partials/fonts';
+
+.calendar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0 1rem;
+    &__container {
+        width: 100%;
+        background-color: $background-yellow;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &__headline {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: $button-orange solid 2px;
+        border-bottom: $button-orange solid 2px;
+        padding: 0.3rem 0;
+        margin: 1rem 0;
+    }
+
+    &__headline-month {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    &__headline-controls {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__headline-control-arrow {
+        height: 0.5rem;
+
+    }
+
+    &__weeks-grid {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    &__weeks-grid-cell {
+        width: 14%;
+        font-size: 0.8rem;
+    }
+
+    &__grid {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    &__grid-wrap {
+        width: 14%; 
+        padding: 0.1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    &__grid-wrapper {
+        width: 100%;
+        border-radius: 5px;
+        background-color: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        border: $background-accent solid 2px;
+    }
+
+    &__grid-cell {
+        position: relative;
+        width: 100%;
+        display: flex;
+        padding-left: 0.1rem;
+        font-size: 0.8rem;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        background-color: $background-accent;
+    }
+
+    &__grid-cell-inactive {
+        opacity: 40%;
+    }
+
+    &__grid-cell-img {
+        position: absolute;
+        top: -5px;
+        right: -5px; 
+        height: 1rem;
+    }
+
+    &__grid-weather-icon {
+        height: 1.8rem;
+    }
+}
+
+.display {
+    &__no {
+        display: none;
+    }
+
+    &__yes {
+        display: flex;
+    }
+}

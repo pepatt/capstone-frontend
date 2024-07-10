@@ -9,14 +9,29 @@ import return_icon from "../../assets/icons/return.png"
 import temp_regular from '../../assets/icons/guage_regular.png'
 import temp_high from '../../assets/icons/guage_high.png'
 import temp_low from '../../assets/icons/guage_low.png'
+import { DateTime, Interval } from 'luxon';
+
+
 
 function Header() {
-
   const [weatherData, setWeatherData] =  useState([]);
   
+  const today = DateTime.local();
+  const firstDayOfActiveMonth = today.startOf('month');
+  
+  const daysOfMonth = Interval.fromDateTimes(
+    firstDayOfActiveMonth.startOf('week'),
+    firstDayOfActiveMonth.endOf('month').endOf('week')
+  ).splitBy({ day: 1 }).map(day => day.start);
+  
+  const dateData = {
+    created_at_day: today.day,
+    created_at_month: today.month,
+    created_at_year: today.year
+  };
 
   async function getWeatherData() {
-    const response = await axios.get("http://localhost:8080/weather");
+    const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
     setWeatherData(response.data[0])
   }
 
