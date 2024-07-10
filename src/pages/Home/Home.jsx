@@ -19,24 +19,39 @@ import calendar from '../../assets/icons/calendar.png'
 import friends from '../../assets/icons/friends.png'
 import cross from '../../assets/icons/cross.png'
 import { React, useState, useEffect } from 'react'
+import { DateTime, Interval } from 'luxon';
+
 
 function Home() {
   const [weatherData, setWeatherData] =  useState([]);
 
+  const today = DateTime.local();
+  const firstDayOfActiveMonth=today.startOf('month');
+    const daysOfMonth = Interval.fromDateTimes(
+    firstDayOfActiveMonth.startOf('week'),
+    firstDayOfActiveMonth.endOf('month').endOf('week')
+  ).splitBy({day: 1}).map(day => day.start);
+
+  const dateData = {
+    created_at_day: daysOfMonth[0].c.day,
+    created_at_month: daysOfMonth[0].c.month,
+    created_at_year: daysOfMonth[0].c.year
+  }
+
+
   async function getWeatherData() {
-    const response = await axios.get("http://localhost:8080/weather/notApplied");
+    const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
     setWeatherData(response.data[0])
   }
 
-  console.log(weatherData);
 
 async function apply() {
-  const response = await axios.get("http://localhost:8080/weather/applied");
+  const response = await axios.post("http://localhost:8080/weather/applied", dateData);
   setWeatherData(response.data[0]);
 }
 
 async function cancelApply() {
-  const response = await axios.get("http://localhost:8080/weather/notApplied");
+  const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
   setWeatherData(response.data[0]);
 }
 
@@ -45,6 +60,7 @@ async function cancelApply() {
     getWeatherData();
   }, [])
 
+  console.log(weatherData);
 
 
   return (
@@ -130,7 +146,7 @@ async function cancelApply() {
                   You can safely enjoy the outside at UVI of <span className='span'>{weatherData.UVI}</span>, sunscreen application is still recommended as direct sunlight exposure over a long period of time can still cause serious damage to your skin.
                 </p>
               )
-              : weatherData <= 2 ? (
+              : weatherData.UVI <= 2 ? (
                 <p>
                   Sunscreen applicatoin is not necessary as the UV index is low at <span className='span'>{weatherData.UVI}</span>, long exposure to sunlight is unlikely to cause harm sunglasses and hats are not recommended.
                 </p>
