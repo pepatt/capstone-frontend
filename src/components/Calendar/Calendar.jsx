@@ -17,6 +17,7 @@ import forward from '../../assets/icons/forward.png'
 export default function Calendar() {
 
   const [isAppliedDays, setIsAppliedDays] = useState([]);
+  const [allDaysData, setAllDaysData] = useState([]);
 
   const today = DateTime.local();
   const [firstDayOfActiveMonth, setFirstDayOfActiveMonth] = useState(
@@ -41,12 +42,11 @@ export default function Calendar() {
     setFirstDayOfActiveMonth(today.startOf('month'));
   }
 
-  async function ConditionalRenderData() {
+  async function conditionalRenderData() {
     try{
     const dateData = {
-        month: 7,
-        year: 2024,
-        isApplied: true
+        month: firstDayOfActiveMonth.c.month,
+        year: firstDayOfActiveMonth.c.year
     }
 
     const response = await axios.post("http://localhost:8080/weather/dataDependant", dateData);
@@ -57,10 +57,28 @@ export default function Calendar() {
     }
   }
   
+  async function allRenderData() {
+    try {
+      const dateData = {
+        month: firstDayOfActiveMonth.c.month,
+        year: firstDayOfActiveMonth.c.year
+    }
+      const response = await axios.post("http://localhost:8080/weather/dateDependantWeather", dateData);
+      setAllDaysData(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
-    ConditionalRenderData();
+    conditionalRenderData();
+    allRenderData();
   }, []);
+
+  useEffect(() => {
+    conditionalRenderData();
+    allRenderData();
+  }, [firstDayOfActiveMonth]);
 
 
   return (
@@ -94,6 +112,7 @@ export default function Calendar() {
         <div className="calendar__grid">
           {daysOfMonth.map((dayOfMonth, dayOfMonthIndex) => {
             const isApplied = isAppliedDays.some((data) => data.created_at_day === dayOfMonth.day);
+            const weatherObjFound = allDaysData.find((data) => data.created_at_day === dayOfMonth.day);
 
             return (
               <div key={dayOfMonthIndex} className="calendar__grid-wrap">
@@ -104,12 +123,28 @@ export default function Calendar() {
               })}>
                 <div className={"calendar__grid-cell"}>
                   {dayOfMonth.day}
-                  <img src={check} alt="check img" className={classNames({
-                    "calendar__grid-cell-img": true,
-                    "display__no": !isApplied
-                    })}/>
+                  {dayOfMonth.month === firstDayOfActiveMonth.month && (
+                    <img src={check} alt="check img" className={classNames({
+                      "calendar__grid-cell-img": true,
+                      "display__no": !isApplied,
+                      })}/>
+                  )}
                 </div>
-                <img src={sun_clouds} className={`calendar__grid-weather-icon`} />
+                <img src={
+                  dayOfMonth.month !== firstDayOfActiveMonth.month
+                  ? ""
+                  : typeof weatherObjFound === 'undefined'
+                  ? ""
+                  : weatherObjFound.description === "cloudy" 
+                  ? clouds 
+                  : weatherObjFound.description === "clear sky"
+                  ? sun 
+                  : weatherObjFound.description === "few clouds" 
+                  ? sun_clouds
+                  : weatherObjFound.description === "raining"
+                  ? rain
+                  : clouds
+                  } className={`calendar__grid-weather-icon`} />
               </div>
             </div>
             );

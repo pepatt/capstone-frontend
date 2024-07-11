@@ -7,7 +7,7 @@
     &__wrap {
         width: 100%;
         padding: 0 1rem;
-        padding-bottom: 12rem;
+        padding-bottom: 17rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -15,6 +15,7 @@
     }
   
     &__accounts-title {
+        color: $light-blue;
         font-size: 1.5rem;
         padding: 1rem 0;
     }
@@ -27,9 +28,11 @@
   
     &__name {
         padding: 0.5rem;
+        font-size: 1.3rem;
     }
   
     &__weather-title {
+        color: $light-blue;
         font-size: 1.5rem;
         padding: 1rem 0;
     }

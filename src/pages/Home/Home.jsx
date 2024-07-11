@@ -22,6 +22,10 @@ import { React, useState, useEffect } from 'react'
 import { DateTime, Interval } from 'luxon';
 
 
+import Calendar from '../../components/Calendar/Calendar'
+import Friends from '../Friends/Friends'
+
+
 function Home() {
   const [weatherData, setWeatherData] =  useState([]);
 
@@ -174,6 +178,14 @@ async function cancelApply() {
           }
 
         </div>
+          <div className="home__secondary-content">
+            <div className="home__calendar-wrap">
+              <Calendar/>
+            </div>
+            <div className="home__friends">
+              <Friends/>
+            </div>
+          </div>
       </div>
     </div>
   )
