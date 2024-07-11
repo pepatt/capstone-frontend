@@ -44,6 +44,12 @@ function Home() {
     created_at_year: today.year
   };
 
+  const mock = {
+    day: 11,
+    month: 7,
+    year: 2024
+  };
+
   async function getWeatherData() {
     const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
     setWeatherData(response.data[0])
@@ -59,6 +65,7 @@ async function apply() {
 
 async function cancelApply() {
   const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
+  await axios.post("http://localhost:8080/weather/dataDependantDelete", mock);
   setWeatherData(response.data[0]);
   setRefresh(!refresh);
 }
