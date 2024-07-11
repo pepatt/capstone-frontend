@@ -59,7 +59,11 @@ export default function Calendar() {
   
   async function allRenderData() {
     try {
-      const response = await axios.get("http://localhost:8080/weather");
+      const dateData = {
+        month: firstDayOfActiveMonth.c.month,
+        year: firstDayOfActiveMonth.c.year
+    }
+      const response = await axios.post("http://localhost:8080/weather/dateDependantWeather", dateData);
       setAllDaysData(response.data);
     } catch (err) {
       console.log(err);
@@ -109,7 +113,6 @@ export default function Calendar() {
           {daysOfMonth.map((dayOfMonth, dayOfMonthIndex) => {
             const isApplied = isAppliedDays.some((data) => data.created_at_day === dayOfMonth.day);
             const weatherObjFound = allDaysData.find((data) => data.created_at_day === dayOfMonth.day);
-            console.log(weatherObjFound);
 
             return (
               <div key={dayOfMonthIndex} className="calendar__grid-wrap">
