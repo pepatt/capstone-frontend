@@ -1,5 +1,6 @@
 @import '../../styles/partials/variables';
 @import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
 
 .header {
     width: 100%;
@@ -9,6 +10,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 0;
+    @include desktop {
+        display: none;
+    }
     &__return-wrap {
       width: 33%;
       displaY: flex;
@@ -18,7 +24,7 @@
     }
   
     &__return-img {
-        height: 1.5rem;
+        height: 2rem;
     }
   
     &__title-wrap {
@@ -42,6 +48,6 @@
     }
   
     &__temp-img {
-        height: 1.5rem;
+        height: 2.5rem;
     }
   }

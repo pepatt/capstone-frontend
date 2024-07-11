@@ -36,7 +36,6 @@ function Friends() {
             <p className="friends__name">{data.name}</p>
           </div>
           <div className="friends__applied-wrap">
-            <p className="friends__applied">Applied?</p>
             <img src={
               data.isApplied === 0
               ? cross
