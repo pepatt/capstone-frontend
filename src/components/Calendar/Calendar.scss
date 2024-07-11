@@ -1,5 +1,6 @@
 @import '../../styles/partials/variables';
 @import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
 
 .calendar {
     width: 100%;
@@ -28,6 +29,9 @@
         border-bottom: $button-orange solid 2px;
         padding: 0.3rem 0;
         margin: 1rem 0;
+        @include desktop {
+            font-size: 1.3rem;
+        }
     }
 
     &__headline-month {
@@ -44,11 +48,17 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
+        cursor: pointer;
     }
 
     &__headline-control-arrow {
         height: 0.5rem;
-
+        cursor: pointer;
+        @include desktop {
+            height: 1rem;
+            padding-top: 1rem;
+            padding: 0 0.5rem;
+        }
     }
 
     &__weeks-grid {

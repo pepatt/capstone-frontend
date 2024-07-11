@@ -1,5 +1,6 @@
 @import '../../styles/partials/variables';
 @import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
 
 .header {
     width: 100%;
@@ -11,6 +12,9 @@
     align-items: center;
     position: relative;
     top: 0;
+    @include desktop {
+        display: none;
+    }
     &__return-wrap {
       width: 33%;
       displaY: flex;

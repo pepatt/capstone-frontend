@@ -14,8 +14,8 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        @include tablet {
-            padding: 0.5rem 2rem;
+        @include desktop {
+            padding: 0.5rem 6rem;
         }
     }
 
@@ -40,10 +40,14 @@
         top: -0.1rem;
         left: -0.12rem;
         height: 2rem;
+        cursor: pointer;
     }
 
     &__header-title {
         height: 3rem;
+        @include desktop {
+            height: 4rem;
+        }
     }
     &__header-temp-wrapper {
         width: 100%; 
@@ -62,6 +66,10 @@
             padding: 2rem 6rem;
             width: 100%;
             background-color: $background-yellow;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
     }
 
@@ -75,6 +83,7 @@
         background-color: $background-yellow;
         @include desktop { 
             width: 50%;
+            padding: 0 6rem;
         }
     }
 
@@ -91,6 +100,9 @@
         width: 100%;
         border-radius: 20px; 
         box-shadow: 0px 0px 10px $box-shadow-grey;
+        @include desktop {
+            
+        }
     }
   
     &__two-icons-wrap {
@@ -112,6 +124,9 @@
         width: 40%;
         padding: 1rem 0;
         box-shadow: 0px 0px 10px $box-shadow-grey;
+        @include desktop {
+            display: none;
+        }
     }
 
     &__calendar-icon {
@@ -145,6 +160,7 @@
       font-size: 1.2rem;
       font-weight: 800;
       box-shadow: 0px 0px 10px $box-shadow-grey;
+      cursor: pointer;
     }
 
     &__apply-btn-active {
@@ -184,6 +200,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
     }
     &__apply-btn-cancel {
         height: 1rem;
@@ -195,6 +212,48 @@
       text-decoration: underline;
       cursor: pointer;
       padding-bottom: 1rem;
+    }
+
+    &__secondary-content { 
+        display: none;
+        @include desktop {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 6rem;
+        }
+    }
+
+    &__calendar-wrap {
+        display: none;
+        @include desktop {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+    &__friends {
+        display: none;
+        @include desktop {
+            display: flex;
+            width: 100%;
+            overflow: auto;
+            height: 40vh;
+            &::-webkit-scrollbar{
+                width: 10px;
+              }
+            &::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+                background-color: $button-orange;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: 8px;
+                background-color: $white;
+                border: 1px solid #cacaca;
+            }
+        }
     }
   }
   

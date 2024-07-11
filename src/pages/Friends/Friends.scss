@@ -1,5 +1,6 @@
 @import '../../styles/partials/variables';
 @import '../../styles/partials/fonts';
+@import '../../styles/partials/mixins';
 
 .friends {
     width: 100%;
@@ -16,6 +17,9 @@
         justify-content: center;
         align-items: flex-start;
         gap: 1rem;
+        @include desktop {
+          padding: 0 1rem;
+        }
     }
 
     &__wrapper {
@@ -29,6 +33,7 @@
         border-right: $background-accent solid 2px;
         border-left: $background-accent solid 2px;
         border-radius: 10px;
+        cursor: pointer;
     }
   
     &__user-icon-wrap {
