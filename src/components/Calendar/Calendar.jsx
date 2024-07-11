@@ -14,7 +14,8 @@ import sun_clouds from '../../assets/images/sun_clouds.png'
 import back from '../../assets/icons/back.png'
 import forward from '../../assets/icons/forward.png'
 
-export default function Calendar() {
+
+export default function Calendar({refresh}) {
 
   const [isAppliedDays, setIsAppliedDays] = useState([]);
   const [allDaysData, setAllDaysData] = useState([]);
@@ -78,7 +79,7 @@ export default function Calendar() {
   useEffect(() => {
     conditionalRenderData();
     allRenderData();
-  }, [firstDayOfActiveMonth]);
+  }, [firstDayOfActiveMonth, refresh]);
 
 
   return (

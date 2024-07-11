@@ -28,6 +28,7 @@ import Friends from '../Friends/Friends'
 
 function Home() {
   const [weatherData, setWeatherData] =  useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const today = DateTime.local();
   const firstDayOfActiveMonth = today.startOf('month');
@@ -46,17 +47,20 @@ function Home() {
   async function getWeatherData() {
     const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
     setWeatherData(response.data[0])
+    setRefresh(!refresh);
   }
 
 
 async function apply() {
   const response = await axios.post("http://localhost:8080/weather/applied", dateData);
   setWeatherData(response.data[0]);
+  setRefresh(!refresh);
 }
 
 async function cancelApply() {
   const response = await axios.post("http://localhost:8080/weather/notApplied", dateData);
   setWeatherData(response.data[0]);
+  setRefresh(!refresh);
 }
 
 
@@ -180,7 +184,7 @@ async function cancelApply() {
         </div>
           <div className="home__secondary-content">
             <div className="home__calendar-wrap">
-              <Calendar/>
+              <Calendar refresh={refresh} />
             </div>
             <div className="home__friends">
               <Friends/>
