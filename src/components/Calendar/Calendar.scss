@@ -9,7 +9,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0 1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 15rem;
+    @include desktop {
+        padding-bottom: 2rem;
+    }
     &__container {
         width: 100%;
         background-color: $background-yellow;
@@ -85,12 +88,17 @@
 
     &__grid-wrap {
         width: 14%; 
-        padding: 0.1rem;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
         flex-wrap: wrap;
+        padding: 1.5rem 0.1rem;
+        border-bottom: $button-orange solid 2px;
+        @include desktop {
+            padding: 0.1rem;
+            border: none;
+        }
     }
 
     &__grid-wrapper {
