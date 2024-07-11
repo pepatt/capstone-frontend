@@ -120,7 +120,7 @@ export default function Calendar() {
               })}>
                 <div className={"calendar__grid-cell"}>
                   {dayOfMonth.day}
-                  {dayOfMonth.month == firstDayOfActiveMonth.month && (
+                  {dayOfMonth.month === firstDayOfActiveMonth.month && (
                     <img src={check} alt="check img" className={classNames({
                       "calendar__grid-cell-img": true,
                       "display__no": !isApplied,
